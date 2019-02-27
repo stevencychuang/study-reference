@@ -1,0 +1,32 @@
+install anaconda
+source .bashrc
+create new environment
+conda create -n py36 python=3.6
+conda activate py36
+(pip install jupyter notebook)
+
+install python-can
+pip install python-can
+
+install make
+sudo apt install make
+
+install gcc
+sudo apt-get install gcc
+
+enable pcan in linux
+
+install driver peak-linux-driver-8.7.0
+cd peak-linux-driver-8
+make clean
+make
+sudo make install
+(modprobe pcan)
+
+install library PCAN_Basic_Linux-4.2.0
+cd PCAN_Basic_Linux-4.2.0
+cd pcanbasic
+make clean
+make all 
+sudo make install
+(redo the above to ensure the link of libpcanbasic.so)

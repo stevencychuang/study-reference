@@ -1,0 +1,7 @@
+uninstall gpu driver(install by cuda later):
+	NVIDIA 3D Vision　驅動程式
+	NVIDIA 圖形驅動程式
+download cuda and install it(note the version if support tensorflow)
+download corresponding cuDNN and unzip it into cuda folder
+pip install tensorflow-gpu
+pip install keras

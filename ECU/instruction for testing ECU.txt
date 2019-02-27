@@ -1,0 +1,12 @@
+1. enabling ethernet:
+change IP4 as:
+192.168.11.1
+255.255.255.0
+
+2. confirm the cameras active:
+open k2 and switch as MISC tab
+Scan available Cam and click them
+Press Debug_on and click Ethernet and K2 Enable
+
+3. Execute the testing process
+

@@ -1,0 +1,42 @@
+Add remote url:
+git remote add origin git@github.com:User/UserRepo.git
+git remote add gitlab http://192.168.2.126/steven/camera-artifact-detect.git
+
+Remove remote url:
+git remote rm destination
+
+
+Remove tracking folder:
+git rm -r --cached path_to_your_folder/
+
+
+Master merge with other branch:
+git checkout master
+git merge handover
+
+
+Remove branch:
+git branch -d name_branch
+
+
+Reset the status as the current head:
+git checkout -- .
+
+
+Force back to specific commit:
+git reset --hard <tag/branch/commit id>
+
+
+Synchronize submodule with another git url.
+Ref: https://docs.gitlab.com/ee/ci/git_submodules.html.
+1. Edit .gitmodules file:
+[submodule "project-x"]
+  path = project-x
+  url = https://gitserver.com/group/project-x.git
+2. Git command for sync and init:
+git submodule sync --recursive
+git submodule update --init --recursive
+
+
+Undo git init:
+rm -rf .git

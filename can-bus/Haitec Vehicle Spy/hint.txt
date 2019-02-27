@@ -1,0 +1,10 @@
+# Installation
+click icsAutoPlay
+choose the license file 15G_WU_128378.lic
+copy the folder in oToBrite Data Directory and the folder Databases into the same structure of installing folder
+
+# Uage
+1. click Network Databases
+2. select platform as oToDAS300
+3. add dbc file and save
+4. enable Message Editor and select Database

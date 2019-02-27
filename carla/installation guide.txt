@@ -1,0 +1,20 @@
+Reference:
+https://carla.readthedocs.io/en/latest/how_to_build_on_windows/
+
+Dependencies:
+Git
+Make
+CMake
+Python3 x64
+Visual Studio (2017):
+  SDK 8.1
+  VC++ toolset for CMake
+  VC++ toolset  
+  VC++ distribution
+Unreal Engine:
+  Download UE content from https://drive.google.com/uc?id=1FtC00CrDb7Kz5StBAwb6vqOGbzZtpROx&export=download
+
+Build local repository:
+git clone https://github.com/carla-simulator/carla.git
+Extract the UE content to Unreal/CarlaUE4/Content/Carla
+make launch
