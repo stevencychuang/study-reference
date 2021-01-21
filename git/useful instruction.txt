@@ -2,6 +2,9 @@ Add remote url:
 git remote add origin git@github.com:User/UserRepo.git
 git remote add gitlab http://192.168.2.126/steven/camera-artifact-detect.git
 
+Change your remote's URL from HTTPS to SSH with the git remote set-url command:
+git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+
 Remove remote url:
 git remote rm destination
 
@@ -26,6 +29,20 @@ git checkout -- .
 Force back to specific commit:
 git reset --hard <tag/branch/commit id>
 
+Head back and resume
+git reset HEAD^x
+git log --oneline  (to get the commit or)
+git reflog
+git reset xxx(the commit to resume)
+
+Temporary store editing state and resume:
+git stash
+git stash pop
+Or:
+git stash
+git stash list
+git stash pop stash@{x}
+
 
 Synchronize submodule with another git url.
 Ref: https://docs.gitlab.com/ee/ci/git_submodules.html.
@@ -33,6 +50,9 @@ Ref: https://docs.gitlab.com/ee/ci/git_submodules.html.
 [submodule "project-x"]
   path = project-x
   url = https://gitserver.com/group/project-x.git
+Alternative way:
+git submodule add "url" "path"
+
 2. Git command for sync and init:
 git submodule sync --recursive
 git submodule update --init --recursive
@@ -40,3 +60,43 @@ git submodule update --init --recursive
 
 Undo git init:
 rm -rf .git
+
+
+Git with SVN:
+# Clone a repo (like git clone):
+  git svn clone http://svn.example.com/project/trunk
+# Update with the current status:
+  git svn fetch
+# Something is committed to SVN, rebase your local changes against the
+# latest changes in SVN:
+  git svn rebase
+# Now commit your changes (that were committed previously using git) to SVN,
+# as well as automatically updating your working HEAD:
+  git svn dcommit
+# Append svn:ignore settings to the default git exclude file:
+  git svn show-ignore >> .git/info/exclude
+
+Tracking and contributing to an entire Subversion-managed project (complete with a trunk, tags and branches):
+
+# Clone a repo (like git clone):
+  git svn clone http://svn.example.com/project -T trunk -b branches -t tags
+# View all branches and tags you have cloned:
+  git branch -r
+# Create a new branch in SVN
+  git svn branch waldo
+# Reset your master to trunk (or any other branch, replacing 'trunk'
+# with the appropriate name):
+  git reset --hard remotes/trunk
+# You may only dcommit to one branch/tag/trunk at a time.  The usage
+# of dcommit/rebase/show-ignore should be the same as above.
+
+Subtree example:
+# Add the 1st subtree project
+git remote add ui-module http://192.168.2.81:8080/avp-develop/ui-module
+git subtree add --prefix ui-module ui-module master
+# Add the 2nd subtree project and update by pull the further commit(by branch)
+git remote add avp-common http://192.168.2.81:8080/avp-develop/oto-avp-common
+git subtree add --prefix avp-common avp-common master
+git subtree pull --prefix avp-common avp-common develop
+# Push the combined supertree to the remote
+git push
