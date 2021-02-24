@@ -46,14 +46,18 @@ git stash pop stash@{x}
 
 Synchronize submodule with another git url.
 Ref: https://docs.gitlab.com/ee/ci/git_submodules.html.
-1. Edit .gitmodules file:
+Ref: https://stackoverflow.com/questions/36386667/how-to-make-an-existing-directory-within-a-git-repository-a-git-submodule
+1. Remove the git stagging if the submodule exsists normal file stagging in super project
+git rm -r "path"
+
+2. Edit .gitmodules file:
 [submodule "project-x"]
   path = project-x
   url = https://gitserver.com/group/project-x.git
-Alternative way:
+Alternative way(recommanded):
 git submodule add "url" "path"
 
-2. Git command for sync and init:
+3. Git command for sync and init:
 git submodule sync --recursive
 git submodule update --init --recursive
 

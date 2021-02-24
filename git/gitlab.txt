@@ -1,3 +1,55 @@
-the ref to install gitlab on ubuntu 16.04
+The ref to install gitlab on ubuntu 16.04
 https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-gitlab-on-ubuntu-16-04
 
+
+Gitlab on docker:
+ref:
+https://ithelp.ithome.com.tw/articles/10211148
+
+Some basic command for gitlab docker:
+sudo docker stop steven_gitlab
+sudo docker restart steven_gitlab
+sudo docker rm steven_gitlab
+
+Set external url for GitLab on docker:
+1. Run shell on the container:
+docker exec -it <mycontainer> bash
+2. Edit config:
+vim /etc/gitlab/gitlab.rb
+3. Define external url(noted! make sure the port should be public if with specific port):
+# external_url 'GENERATED_EXTERNAL_URL'
+external_url 'http://192.168.20.138'
+4. Reconfig:
+gitlab-ctl reconfigure
+gitlab-ctl restart
+
+Check the log of GitLab container:
+sudo docker logs steven_gitlab
+
+Notice for update GitLab service:
+https://docs.gitlab.com/omnibus/docker/README.html#update-gitlab-using-docker-engine
+https://docs.gitlab.com/ee/policy/maintenance.html#upgrading-major-versions
+https://docs.gitlab.com/omnibus/update/gitlab_13_changes.html
+https://docs.gitlab.com/ee/update/README.html#checking-for-background-migrations-before-upgrading
+https://hub.docker.com/r/gitlab/gitlab-ce/tags?page=1
+
+How to undo a --single-branch clone:
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*" 
+git remote update
+ref:
+https://www.delenamalan.co.za/2019/fetch-all-branches.html
+
+
+Run docker example command:
+sudo docker run -d --name steven_gitlab -p 8080:80 -p 4433:443 -p 2222:22 --privileged --restart always -v /NAS/GitLab/mlteam/config:/etc/gitlab -v /NAS/GitLab/mlteam/logs:/var/log/gitlab -v /NAS/GitLab/mlteam/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+
+sudo docker run -d --name steven_gitlab -p 8080:80 --privileged --restart always -v /NAS/GitLab/mlteam/config:/etc/gitlab -v /NAS/GitLab/mlteam/logs:/var/log/gitlab -v /NAS/GitLab/mlteam/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+
+20200417
+sudo docker run -d --name steven_gitlab -p 8080:80 -p 7171:7171 -p 4433:443 -p 2222:22 --privileged --restart always -v /NAS2/server/GitLab/mlteam/config:/etc/gitlab -v /NAS2/server/GitLab/mlteam/logs:/var/log/gitlab -v /NAS2/server/GitLab/mlteam/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+
+20200522
+sudo docker run -d --name steven_gitlab -p 8080:8080 -p 7171:7171 -p 4433:443 -p 2222:22 --privileged --restart always -v /NAS2/server/GitLab/mlteam/config:/etc/gitlab -v /NAS2/server/GitLab/mlteam/logs:/var/log/gitlab -v /NAS2/server/GitLab/mlteam/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+
+20200923
+sudo docker run -d --name steven_gitlab -p 8080:8080 -p 7171:7171 -p 4433:443 -p 2222:22 --privileged --restart always -v /NAS2/server/GitLab/mlteam/config:/etc/gitlab -v /NAS2/server/GitLab/mlteam/logs:/var/log/gitlab -v /NAS2/server/GitLab/mlteam/data:/var/opt/gitlab gitlab/gitlab-ce:12.10.14-ce.0
